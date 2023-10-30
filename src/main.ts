@@ -21,6 +21,12 @@ const imageUrls = [
     "/tile8.png"
 ];
 
+const images: HTMLImageElement[] = []
+imageUrls.forEach((url) => {
+    let i = new Image();
+    i.src = url;
+    images.push(i);
+})
 
 //defining the size of the main grid
 const numTiles = 32;
@@ -39,8 +45,7 @@ let tilemap: HTMLImageElement[][] = new Array(numTiles);
 for(let i = 0; i < numTiles; i++) {
     let row = new Array(numTiles);
     for (let j = 0; j < numTiles; j++) {
-        row[j] = new Image();
-        row[j].src = "/tile1.png";
+        row[j] = images[0];
     }
     tilemap[i] = row;
 }
@@ -79,8 +84,8 @@ gridCanvas.addEventListener("click", (e) => {
     const coordX = Math.trunc(e.offsetX / tileSize);
     const coordY = Math.trunc(e.offsetY / tileSize);
 
-    tilemap[coordX][coordY].src = currentTile;
-    drawTexture(coordX, coordY, gridCtx, tilemap[coordX][coordY], gridCanvas.width / numTiles, gridCanvas.height / numTiles, tileSize);
+    tilemap[coordX][coordY] = images[imageUrls.indexOf(currentTile)];
+    redrawTilemap();
 })
 
 
