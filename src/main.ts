@@ -80,7 +80,7 @@ gridCanvas.addEventListener("click", (e) => {
     const coordY = Math.trunc(e.offsetY / tileSize);
 
     tilemap[coordX][coordY].src = currentTile;
-    redrawTilemap();
+    drawTexture(coordX, coordY, gridCtx, tilemap[coordX][coordY], gridCanvas.width / numTiles, gridCanvas.height / numTiles, tileSize);
 })
 
 
